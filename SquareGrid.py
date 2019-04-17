@@ -1,3 +1,8 @@
+# Author : Ahmed Ashraf Taha
+# email : ahmedashraf@aucegypt.edu
+# modified : 17.04.19
+
+
 import numpy as np
 
 
@@ -24,8 +29,25 @@ class SquareGrid:
         if self.grid[row][col] != 0:
             return True
 
+    def heuristic_function(self,source_x, source_y, source_layer, target_x, target_y, target_layer):
+            dy = abs(target_y-source_y)
+            dx = abs(target_x-source_x)
+            if source_layer == 1 and target_layer == 3 or source_layer == 3 and target_layer == 1 :
+                return self.via_cost * (dy+dx)
+            elif source_layer == 1 and target_layer == 2:
+                return dx + self.via_cost*dy
+            elif source_layer == 2 and target_layer == 1:
+                return self.via_cost*dx + dy
+            else: return 1 * (dx+dy)
+
+    def neighbours(self,x,y):
+        # does not care for layers here that is handled somewhere else
+
+
+    def astar(self, source_x, source_y, source_layer, target_x, target_y, target_layer):
+        # The routing
+
     def print(self):
         print(self.grid)
-
 
 
