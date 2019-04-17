@@ -12,21 +12,20 @@ class SquareGrid:
         for i in range(self.grid_h):
             for j in range(self.grid_w):
                 self.grid[i][j] = 0
-        if self.layer == 1 or self.layer == 3:
-            for i in range(self.grid_w):
-                self.grid[self.grid_h//2][i] = self.via_cost  # needs checking, most probably wrong
-        else:
-            for i in range(self.grid_h):
-                self.grid[i][self.grid_w//2] = self.via_cost  # needs checking, most probably wrong
 
     def insert(self, row, col, val):
-        if self.grid[row][col] == 0:
+        if not self.occupied(row, col):
             self.grid[row][col] = val
 
     def remove(self, row, col):
         self.grid[row][col] = 0
 
+    def occupied(self, row, col):
+        if self.grid[row][col] != 0:
+            return True
+
     def print(self):
         print(self.grid)
+
 
 
