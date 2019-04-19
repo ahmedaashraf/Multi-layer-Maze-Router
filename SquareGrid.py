@@ -36,16 +36,56 @@ class SquareGrid:
 
     def astar(self, source_x, source_y, source_layer, target_x, target_y, target_layer):
 
+
+
         g = [] #Actual movement
         h = [] #Heuristic
+        f = []  # f = g + h
+
         open_list = []  # nodes visited but not expanded
         closed_list = [] #  nodes visited and expanded
+        path = set()
+
+
+        open_list.append({source_x,source_y,source_layer})
+
+        f.append(self.heuristic_function(source_x, source_y, source_layer, target_x, target_y, target_layer))
+
+        h.append(self.heuristic_function(source_x, source_y, source_layer, target_x, target_y, target_layer))
 
         g.append(0)
-        h.append(self.heuristic_function(source_x, source_y, source_layer, target_x, target_y, target_layer))
-        open_list.append((source_x, source_y,source_layer))
 
         while len(open_list) > 0:
+
+            current_node = None
+            value = 1000
+            for n in range(len(open_list)-1):     # get the lowest value for f[n] = g[n] + h[n]
+
+                if f[n] < value:
+                    value = f[n]
+                    current_node = open_list[n]
+
+
+            if current_node == {target_x, target_y, target_layer}:
+
+                    return path , f
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
