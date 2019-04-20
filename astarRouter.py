@@ -82,7 +82,6 @@ class astarRouter:
             if E[1] < self.grid_w and self.grid[E[0]][E[1]] != source_layer+10:
                 finalnodes.append(E)
 
-
         if len(finalnodes) == 0:
             print('Cannot find a next node, so cannot find a path')
         elif len(finalnodes) == 1:
