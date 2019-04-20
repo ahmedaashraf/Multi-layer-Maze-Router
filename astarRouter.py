@@ -142,10 +142,6 @@ class astarRouter:
             if current_node == (target_x, target_y, target_layer):
                 arrived = True
 
-            if arrived == True:
-              print("Stop")
-
-
         return path,g,f
 
     def printgrid(self):
@@ -157,5 +153,7 @@ class astarRouter:
                 else:
                     print(self.grid[i][j], end=",")
             print("\n")
+
+               
 
 
