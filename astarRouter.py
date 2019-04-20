@@ -89,7 +89,7 @@ class astarRouter:
                 finalnodes.append(E)
 
         if len(finalnodes) == 0:
-            print('Cannot find a next node, so cannot find a path')
+            return (source_x, source_y, source_layer),0,0
 
         else:
             f = None
@@ -133,6 +133,10 @@ class astarRouter:
 
         while not arrived:
             current_node_,f_val,g_val = self.next_node(current_node[0], current_node[1], current_node[2], target_x, target_y, target_layer)
+
+            if current_node == current_node_:
+                arrived = True
+
             current_node = current_node_
             self.grid[current_node[0]][current_node[1]][current_node[2]-1] = 1
             path.append(current_node)
@@ -154,6 +158,6 @@ class astarRouter:
                     print(self.grid[i][j], end=",")
             print("\n")
 
-               
+
 
 
