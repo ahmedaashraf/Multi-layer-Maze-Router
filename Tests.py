@@ -4,6 +4,9 @@
 
 import astarRouter
 import matplotlib.pyplot as plt
+import time
+
+start = time. time()
 
 print("Enter Path , in the following order:source row ,source col ,source layer ,target row ,target col ,target layer")
 
@@ -28,6 +31,9 @@ while s_r >= 0:
     print(" f : ", c)
     print(" ")
 
+    print("The Grid")
+    test.printgrid()
+
     s_r = int(input())
     s_c = int(input())
     s_l = int(input())
@@ -36,9 +42,6 @@ while s_r >= 0:
     t_l = int(input())
 
 
-
-print("The Grid")
-test.printgrid()
-
-
+end = time. time()
+print("Cpu Time",end - start)
 
