@@ -27,11 +27,12 @@ class astarRouter:
 
     def next_node(self,source_x, source_y, source_layer, target_x, target_y, target_layer):
 
-        nn = None
+        nn = 10000
+        g = None
+        finalnodes = []
+        chosen_node = None
 
         if source_layer == 1:
-
-            finalnodes = []
 
             N = (source_x - 1, source_y , target_layer)
             W = (source_x, source_y - 1 , source_layer)
@@ -52,8 +53,6 @@ class astarRouter:
 
         elif source_layer == 2:
 
-            finalnodes = []
-
             N = (source_x - 1, source_y, source_layer)
             W = (source_x, source_y - 1, target_layer)
             S = (source_x + 1, source_y, source_layer)
@@ -68,10 +67,7 @@ class astarRouter:
             if E[1] < self.grid_w and self.grid[E[0]][E[1]] != target_layer+10:
                 finalnodes.append(E)
 
-
         else:
-
-            finalnodes = []
 
             N = (source_x - 1, source_y, source_layer)
             W = (source_x, source_y - 1, target_layer)
@@ -86,6 +82,31 @@ class astarRouter:
                 finalnodes.append(S)
             if E[1] < self.grid_w and self.grid[E[0]][E[1]] != source_layer+10:
                 finalnodes.append(E)
+
+
+        if len(finalnodes) == 0:
+            print('Cannot find a next node, so cannot find a path')
+        elif len(finalnodes) == 1:
+            return finalnodes
+        else:
+            f = None
+            for i in finalnodes:
+
+                if source_layer == i[3]:
+
+                    f = 1 + self.heuristic_function(i[0],i[1],i[3],target_x,target_y,target_layer)
+
+                elif source_layer != i[3]:
+
+                    f = self.via_cost+ 1 + self.heuristic_function(i[0],i[1],i[3],target_x,target_y,target_layer)
+
+                if f < nn:
+                    nn = f
+                    chosen_node = i
+                    g = f - self.heuristic_function(i[0],i[1],i[3],target_x,target_y,target_layer)
+
+        return chosen_node,nn,g
+
 
     def route(self,source_x, source_y, source_layer, target_x, target_y, target_layer):
 
@@ -105,10 +126,19 @@ class astarRouter:
             self.grid[source_x][source_y] = 12
         else: self.grid[source_x][source_y] = 13
 
+        current_node = path[0]
+
         while not arrived:
+            current_node_,f_val,g_val = self.next_node(current_node[0], current_node[1], current_node[2], target_x, target_y, target_layer)
+            current_node = current_node_
+            path.append(current_node)
+            f.append(f_val)
+            g.append(g_val)
+
+            if current_node == [target_x, target_y, target_layer]:
+                arrived = True
 
 
 
-
-
+        return path,g
 
