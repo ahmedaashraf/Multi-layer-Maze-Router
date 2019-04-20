@@ -21,9 +21,10 @@ f = g + h, h is the heuristic function.
 
 also in the end you'll get the grid which is a 2d array
 in which each cell have a set of 3 elements of 0's and 1's
-representing an obstacle which is formed within the process
-for example , if grid [0][0] have (1,0,1) this means
-there is an obstacle in layer 1 and an obstacle in layer 3 which also
-means that in layer 1 and 3 are involved in previous paths.
+representing whether the cell is involved in any paths or not and if yes it is
+going to be an obstacle in the future.
+for example if grid[0][0] = (1,1,0) this means that this cell
+is involved in a path in layer 1 and layer 2 but not 3 and this cell is an obstacle
+in these layers in upcoming path findings.
 
 also, a plot for the grid is provided
