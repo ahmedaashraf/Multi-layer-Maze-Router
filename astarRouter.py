@@ -141,3 +141,5 @@ class astarRouter:
 
         return path,g,f
 
+    def printgrid(self):
+        print(self.grid)
