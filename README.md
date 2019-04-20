@@ -28,3 +28,13 @@ is involved in a path in layer 1 and layer 2 but not 3 and this cell is an obsta
 in these layers in upcoming path findings.
 
 also, a plot for the grid is provided
+
+i used this to compute the cpu time
+import time.
+start = time. time()
+"The Program"
+end = time. time()
+print(end - start)
+
+
+The Presentation is provided in pdf and pptx.
