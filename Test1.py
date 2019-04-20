@@ -7,27 +7,18 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
-import astarRouter as astar
+import astarRouter
 
 
-x_s = 0
-y_s = None
-l_s = None
+test = astarRouter.astarRouter(5, 5, 2)
+a, b,c=test.route(0, 0, 1, 1, 2, 2)
 
-x_t = None
-y_t = None
-l_t = None
+print(a)
+print(b)
+print(c)
 
-while x_s >= 0:
-
-    type(x_s)
-    type(y_s)
-    type(l_s)
-    type(x_t)
-    type(y_t)
-    type(l_t)
-
-
+plt.plot(a)
+plt.show()
 
 
 

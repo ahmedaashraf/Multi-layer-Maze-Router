@@ -25,7 +25,7 @@ class astarRouter:
         dx = abs(target_x-source_x)
         dy = abs(target_y-source_y)
 
-        return (target_layer-source_layer)*(dx+dy)
+        return (target_layer-source_layer)+(dx+dy)
 
     def next_node(self,source_x, source_y, source_layer, target_x, target_y, target_layer):
 
@@ -41,7 +41,6 @@ class astarRouter:
             S = (source_x + 1, source_y , target_layer)
             E = (source_x, source_y + 1 , source_layer)
 
-
             if N[0] >= 0 and self.grid[N[0]][N[1]] != target_layer+10:
                 finalnodes.append(N)
             if W[1] >= 0 and self.grid[W[0]][W[1]] != source_layer+10:
@@ -50,8 +49,6 @@ class astarRouter:
                 finalnodes.append(S)
             if E[1] < self.grid_w and self.grid[E[0]][E[1]] != source_layer+10:
                 finalnodes.append(E)
-
-
 
         elif source_layer == 2:
 
@@ -94,18 +91,18 @@ class astarRouter:
             f = None
             for i in finalnodes:
 
-                if source_layer == i[3]:
+                if source_layer == i[2]:
 
-                    f = 1 + self.heuristic_function(i[0],i[1],i[3],target_x,target_y,target_layer)
+                    f = 1 + self.heuristic_function(i[0],i[1],i[2],target_x,target_y,target_layer)
 
-                elif source_layer != i[3]:
+                elif source_layer != i[2]:
 
-                    f = self.via_cost+ 1 + self.heuristic_function(i[0],i[1],i[3],target_x,target_y,target_layer)
+                    f = self.via_cost+ 1 + self.heuristic_function(i[0],i[1],i[2],target_x,target_y,target_layer)
 
                 if f < nn:
                     nn = f
                     chosen_node = i
-                    g = f - self.heuristic_function(i[0],i[1],i[3],target_x,target_y,target_layer)
+                    g = f - self.heuristic_function(i[0],i[1],i[2],target_x,target_y,target_layer)
 
         return chosen_node,nn,g
 
@@ -133,14 +130,14 @@ class astarRouter:
         while not arrived:
             current_node_,f_val,g_val = self.next_node(current_node[0], current_node[1], current_node[2], target_x, target_y, target_layer)
             current_node = current_node_
+            self.grid[current_node[0]][current_node[1]] = 10+current_node[2]
             path.append(current_node)
             f.append(f_val)
             g.append(g_val)
 
-            if current_node == [target_x, target_y, target_layer]:
+            if current_node == (target_x, target_y, target_layer):
                 arrived = True
 
 
-
-        return path,g
+        return path,g,f
 
