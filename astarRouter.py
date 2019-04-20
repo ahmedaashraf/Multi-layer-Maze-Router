@@ -64,7 +64,7 @@ class astarRouter:
                 finalnodes.append(N)
             if W[1] >= 0 and self.grid[W[0]][W[1]] != target_layer+10:
                 finalnodes.append(W)
-            if S[0] < self.grid_h and and self.grid[S[0]][S[1]] != source_layer+10:
+            if S[0] < self.grid_h and self.grid[S[0]][S[1]] != source_layer+10:
                 finalnodes.append(S)
             if E[1] < self.grid_w and self.grid[E[0]][E[1]] != target_layer+10:
                 finalnodes.append(E)
