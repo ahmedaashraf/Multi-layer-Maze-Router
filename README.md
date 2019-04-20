@@ -15,7 +15,7 @@ input the coordinates one by one in the following order
 
 The output: 
 
-For each layer you'll get the shortest path
+For each layer you'll get the shortest path,
 the values of g and f for the A* algorithm's function 
 f = g + h, h is the heuristic function.
 
